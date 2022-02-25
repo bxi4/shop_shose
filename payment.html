@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>SHOPPING - Payment</title>
+</head>
+<body class="body">
+    <div class="n-c-center">
+    </div>
+    <div class="container">
+        <div class="col-6">
+            <div class="form shadow" style="margin-bottom: 10px;">
+                <h1 id="name-product"></h1>
+            </div>
+            <div class="form" style="margin-bottom: 10px;">
+                <table>
+                    <tr>
+                        <td><h2>Price</h2></td>
+                        <td><h2 id="price"></h2></td>
+                    </tr>
+                    <tr>
+                        <td><img alt="" width="70" id="image"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="form">
+
+                <form id="form-payment">
+                    <div class="row">
+                        <input class="w-50" type="text" id="f-name" placeholder="first name" autofocus>
+                        <input class="w-50" type="text" id="l-name" placeholder="Last name">
+                    </div>
+                    <input type="email" id="Email" placeholder="Email">
+                    <input type="text" id="Country" placeholder="Country">
+                    <input type="number" id="zip" placeholder="zip code">
+                    <div class="row">
+                        <input type="number" id="card number" placeholder="card number" class="w-50">
+                        <input type="number" id="date-year-month" placeholder="MM/YY" style="width: 25%;">
+                        <input type="text" id="cvc" placeholder="CVC" style="width: 25%;">
+                    </div>
+                    <div class="j-center icons-pay">
+                        <img src="img/icons/payment-kuraimi.svg" alt="">
+                        <img src="img/icons/payment-card-discover.svg" alt="">
+                        <img src="img/icons/payment-card-mastercard.svg" alt="">
+                        <img src="img/icons/payment-card-visa.svg" alt="">
+
+                    </div>
+                    <div class="j-center">
+                        <button type="submit" style="width: 40%;">Pay</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        window.onload = function () {
+            var url = window.location.href;
+            var url = new URL(url)
+            var id = url.searchParams.get('id');
+            if (!id) {
+                document.getElementsByClassName('container')[0].innerHTML = "<h1> Sorry! but you need Shopping first Payment😄 <a href='index.html'>Shop now</a></h1>"
+            }
+            var pro = document.getElementById('name-product');
+            var price = document.getElementById('price');
+            var image = document.getElementById('image');
+            pro.innerHTML = data[id]['name']
+            price.innerHTML = data[id]['price'] + currency;
+            image.src = 'img/' + data[id]['img'];
+
+        }
+    </script>
+    <script>
+        var not = document.getElementsByClassName('n-c-center')[0];
+        // submit case country event
+        document.getElementById('form-payment').onsubmit = function (e) {
+            var fName = document.getElementById('f-name').value
+            var lName = document.getElementById('l-name').value
+            not.innerHTML = `<div class="noti">thank you♥ shopping again after <span id="second" class="t-base">10</span>s</div>`;
+
+            document.getElementsByClassName('container')[0].innerHTML = `<h1>Mr: <span class="t-highlight">${fName}</span> your request is successfully <a href='index.html'>Shop Again</a></h1>`
+            // remove notification after 10 sec
+            var notifier = document.getElementsByClassName('noti')[0]
+            // countdown 
+            var timeleft = 0;
+            // var downloadTimer = setInterval(function () {
+            //     if (timeleft == 9) {
+            //         clearInterval(downloadTimer);
+            //         window.location.href = 'product.html';
+            //     }
+            //     document.getElementById("second").innerHTML = 9 - timeleft;
+            //     timeleft += 1;
+            // }, 1000);
+            e.preventDefault()
+        }
+    </script>
+
+</body>
+
+</html>
